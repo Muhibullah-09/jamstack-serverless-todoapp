@@ -1,0 +1,12 @@
+{
+  "name": "jamstack-serverless-todoapp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/Muhibullah-09/jamstack-serverless-todoapp.git",
+  "author": "Muhibullah Khan Kamali <57056374+Muhibullah-09@users.noreply.github.com>",
+  "license": "MIT",
+  "private": true,
+  "workspaces":[
+    "packages/*"
+  ]
+}
