@@ -1,16 +1,42 @@
-import React, { useEffect } from 'react';
-import { Container, Heading, Button, Flex } from 'theme-ui';
+import React, { useEffect, useState } from 'react';
+import { Container, Heading, Button, Flex, NavLink } from 'theme-ui';
 import netlifyIdentity from 'netlify-identity-widget';
-
+import { Link } from 'gatsby';
+ 
 export default props => {
-    useEffect( () =>{
+    const [ user , setUser ] = useState();
+    useEffect(() => {
         netlifyIdentity.init({});
     });
-    return(
+
+    netlifyIdentity.on("login" , user =>{
+        netlifyIdentity.close();
+        setUser(user);
+    });
+
+    netlifyIdentity.on("logout" , () =>{
+        netlifyIdentity.close();
+        setUser();
+    })
+    return (
         <Container>
+            <Flex as='nav'>
+                <NavLink as={Link} to="/"  p={2}>
+                    Home
+                </NavLink>
+                <NavLink as={Link} to="/app" p={2}>
+                    Add Task
+                </NavLink>
+                { user && 
+                (
+                <NavLink p={2}>
+                    {user.user_metadata.full_name}
+                </NavLink>
+                )}
+            </Flex>
             <Flex sx={{ flexDirection: "column", padding: 3, textAlign: "center" }}>
                 <Heading as="h1">Todo List</Heading>
-                <Button sx={{ marginTop: 2, color: 'black' ,fontFamily:'monospace' ,cursor: 'pointer' }} onClick={() => { netlifyIdentity.open() }}>
+                <Button sx={{ marginTop: 2, color: 'black', fontFamily: 'monospace', cursor: 'pointer' }} onClick={() => { netlifyIdentity.open() }}>
                     LOGIN
                 </Button>
             </Flex>
