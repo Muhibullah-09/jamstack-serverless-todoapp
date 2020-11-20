@@ -6,7 +6,7 @@
   "author": "Muhibullah Khan Kamali <57056374+Muhibullah-09@users.noreply.github.com>",
   "license": "MIT",
   "private": true,
-  "workspaces":[
+  "workspaces": [
     "packages/*"
   ]
 }
